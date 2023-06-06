@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <link rel="stylesheet" type="text/css" href="HTTP://localhost:3000/styles/index.css">
     <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 
     <title>Rujana's pastries</title>
@@ -23,13 +23,37 @@
                     <div id="product-name-div">
                         <p class="contents-inner-text">Product name</p>
                         <ol id="product-list">
+                            <% if (helper === undefined) {%>
 
+                            <% } else { %>
+                                    <% helper.map((element) => { %>
+                                        <li class="product-in-cart">
+                                            <p class="product-in-cart-name"><%= element.id %></p>
+                                        </li>
+                                    <% }) %>
+                            <% } %>
                         </ol>
                     </div>
                     <div id="amount-div">
                         <p class="contents-inner-text">Quantity</p>
                         <ol id="amount-list">
+                            <% if (helper === undefined) {%>
 
+                            <% } else { %>
+                                    <% helper.map((element) => { %>
+                                        <li class="product-in-cart">
+                                            <div class="product-in-cart-list-element-div">
+                                                <button class="ajust-amount-in-cart-button" 
+                                                        id="minus-${key}" 
+                                                        onclick="removeFromCart('<%= element.id%>')">-</button>
+                                                <p class="product-in-cart-name"><%= element.quantity %></p>
+                                                <button class="ajust-amount-in-cart-button" 
+                                                        id="plus-${key}"
+                                                        onclick="addToCart('<%= element.id %>')">+</button>
+                                            </div>
+                                        </li>
+                                    <% }) %>
+                            <% } %>
                         </ol>
                     </div>
                 </div>
@@ -40,4 +64,43 @@
     <%- include(`partials/footer`); %>
     
 </body>
+
+    <script>
+
+        function addToCart(productID) {
+            fetch(`http://localhost:3000/cart/add/${productID}`, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Product added to the cart succesfully!")
+                } else {
+                    console.error("Failed to add product to cart")
+                }
+            }).catch(error => {
+                console.error("An error occured while adding product to the cart")
+            })
+        }
+
+        function removeFromCart(productID) {
+            fetch(`http://localhost:3000/cart/remove/${productID}`, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    console.log("Product removed from the cart succesfully!")
+                } else {
+                    console.error("Failed to remove product from cart")
+                }
+            }).catch(error => {
+                console.error("An error occured while removing product from the cart")
+            })
+        }
+
+    </script>
+
 </html>
