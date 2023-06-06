@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="http://localhost:3000/styles/index.css">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    
+    <title>Rujana's pastries</title>
+</head>
+<body class="body">
+
+    <%- include(`partials/header`); %>
+ 
+    <main class="main">
+        <div class="all-categories-and-contact-div">
+            <div class="all-categories-div" id="categories">
+                <% categories.map((category) => { %>
+                    <button class="category-button" 
+                            id="<%= category.name %>-div"
+                            onclick="handleCategoryClick('<%= category.id %>')">
+                            <%= category.name %>
+                    </button>
+                <% }) %>
+            </div>
+            <div class="contact-div">
+                <div class="contact-div-element">
+                    <img class="contact-image" id="phone" src="http://localhost:3000/images/phone.svg" alt="phone">
+                    <p class="contact-text">kontakt</p>
+                </div>
+                <div class="contact-div-element">
+                    <img class="contact-image" id="news" src="http://localhost:3000/images/newspaper.svg" alt="newspaper">
+                    <p class="contact-text">newsletter</p>
+                </div>
+                <div class="contact-div-element">
+                    <img class="contact-image" id="facebook" src="http://localhost:3000/images/facebook.svg" alt="facebook">
+                    <img class="contact-image" id="instagram" src="http://localhost:3000/images/instagram.svg" alt="instagram">
+                    <img class="contact-image" id="tiktok" src="http://localhost:3000/images/tiktok.svg" alt="tiktok">
+                    <p class="contact-text">pretplati se</p>
+                </div>
+            </div>
+        </div>
+        <div class="message-and-gallery-div">
+            <div class="message-div">
+                <p id="message">
+                    Pastries are the ultimate indulgence for anyone with a sweet tooth. </br>
+                    Whether you're a fan of classic French patisserie or prefer to explore the world of modern pastry, </br> 
+                    there's something for everyone to savor. So come along on a journey of </br>
+                    buttery, sugary goodness and discover the magic of pastries! </br>
+                </p>
+            </div>
+            <div class="galery-div">
+                <ol id="product-list">
+                    <% if (products === undefined) {%>
+                        <% categories.map((category) => { %>
+                            <li class="card">
+                                <div class="card-div">
+                                    <img class="card-image" src="<%= category.image %>" alt="no image"/>
+                                    <p class="card-name"><%= category.name %></p>
+                                </div>
+                            </li>
+                        <% }) %>
+                    <% } else { %>
+                        <% products.map((product) => { %>
+                            <li class="card">
+                                <div class="card-div">
+                                    <img class="card-image" src="<%= product.image %>" alt="no image"/>
+                                    <button class="card-shopping-cart" id="<%= product.name %>-cart" onClick="addToCart('<%= product.id %>')">
+                                        <img id="<%= product.name %>-card" src="http://localhost:3000/images/cart-icon.svg" alt="no image"/>
+                                    </button>
+                                    <p class="card-name"><%= product.name %></p>
+                                    <div class="card-quantity-div" id="quantity-div-<%= product.id %>">kol</div>
+                                </div>
+                            </li>
+                        <% }) %>
+                    <% } %>
+                </ol>
+            </div>
+        </div>
+
+    </main>
+    
+    <%- include(`partials/footer`); %>
+    
+</body>
+
+    <script>
+
+        function handleCategoryClick(categoryID) {
+            let path = `http://localhost:3000/getProducts/${categoryID}`
+            path = String(path)
+            window.location.href=path
+        }
+
+        function addToCart(productID) {
+            console.log("added")
+        }
+
+    </script>
+
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+
+    <title>Rujana's pastries</title>
+</head>
+<body class="body">
+    
+    <%- include(`partials/header`); %>
+
+    <main class="main">
+        <div class="content-outer-div">
+            <div class="content-inner-div">
+                <p class="cart-text">Cart</p>
+            </div>
+            <div class="contents-outer-div">
+                <div class="contents-inner-div">
+                    <div id="product-name-div">
+                        <p class="contents-inner-text">Product name</p>
+                        <ol id="product-list">
+
+                        </ol>
+                    </div>
+                    <div id="amount-div">
+                        <p class="contents-inner-text">Quantity</p>
+                        <ol id="amount-list">
+
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </main>
+
+    <%- include(`partials/footer`); %>
+    
+</body>
+</html>
