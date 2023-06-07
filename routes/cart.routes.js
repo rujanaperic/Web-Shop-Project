@@ -1,5 +1,8 @@
 var express = require('express');
+const { categories } = require('../data/mydata');
 var router = express.Router();
+
+const mydata = require('../data/mydata')
 
 //middlewares, ono što se zapravo vraća
 const addProduct = async (req, res, next) => {
@@ -40,14 +43,14 @@ const removeProduct = async (req, res, next) => {
         const productId = req.params.id;
 
         // Retrieve the cart from the session or create a new one if it doesn't exist
-        const cart = req.session.cart;
+        let cart = req.session.cart;
         const existingProduct = cart?.find(item => item.id === productId) 
     
         // Add the product to the cart
-        if (existingProduct.quantity > 1) {
+        if (existingProduct?.quantity > 1) {
             existingProduct.quantity -= 1
         } else if (existingProduct.quantity = 1) {
-            cart.pop(existingProduct)
+            cart = cart.filter(item => item.id !== existingProduct.id)
         } 
     
         // Update the cart in the session
@@ -79,10 +82,15 @@ const getAllProducts = (req, res, next) => {
     })
 
     //check
-    console.log(sum)
+    //console.log(sum)
     //all good
 
-    res.render("cart", {helper: req.session.cart, sum: sum})
+    //check
+    const products = mydata.categories.flatMap(categorie => categorie.products)
+    //console.log(products)
+    //all good 
+
+    res.render("cart", {helper: req.session.cart, sum: sum, products: products})
     res.render("header", {helper: req.session.cart, sum: sum})
 
 }

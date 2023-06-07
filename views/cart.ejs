@@ -27,9 +27,12 @@
 
                             <% } else { %>
                                     <% helper.map((element) => { %>
-                                        <li class="product-in-cart">
-                                            <p class="product-in-cart-name"><%= element.id %></p>
-                                        </li>
+                                        <% let product = products.find(item => item.id === element.id ) %>
+                                        <% if (product) { %>
+                                            <li class="product-in-cart">
+                                                <p class="product-in-cart-name"><%= product.name %></p>
+                                            </li>
+                                        <% } %>
                                     <% }) %>
                             <% } %>
                         </ol>
