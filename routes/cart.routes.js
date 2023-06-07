@@ -41,7 +41,7 @@ const removeProduct = async (req, res, next) => {
 
         // Retrieve the cart from the session or create a new one if it doesn't exist
         const cart = req.session.cart;
-        const existingProduct = cart.find(item => item.id === productId) 
+        const existingProduct = cart?.find(item => item.id === productId) 
     
         // Add the product to the cart
         if (existingProduct.quantity > 1) {
