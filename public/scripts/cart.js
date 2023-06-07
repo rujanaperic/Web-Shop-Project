@@ -33,3 +33,12 @@ function removeFromCart(productID) {
         console.error("An error occured while removing product from the cart")
     })
 }
+
+window.addEventListener('pageshow', function(event) {
+    if (event.persisted) {
+      // Page is shown after navigating back
+  
+      // Add your code to reload or update the page content here
+      location.reload();
+    }
+});
