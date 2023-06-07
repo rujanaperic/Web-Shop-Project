@@ -70,7 +70,12 @@
                                         <img id="<%= product.name %>-card" src="http://localhost:3000/images/cart-icon.svg" alt="no image"/>
                                     </button>
                                     <p class="card-name"><%= product.name %></p>
-                                    <div class="card-quantity-div" id="quantity-div-<%= product.id %>">kol</div>
+                                    <% const exists = cart.find(item => item.id === product.id) %>
+                                    <% if (exists) {%>
+                                        <div class="card-quantity-div" id="quantity-div-<%= product.id %>"><%= exists.quantity%></div>
+                                    <% } else { %>
+                                        <div class="card-quantity-div-invisible" id="quantity-div-<%= product.id %>">0</div>
+                                    <% } %>
                                 </div>
                             </li>
                         <% }) %>
@@ -94,6 +99,7 @@
         }
 
         function addToCart(productID) {
+
             fetch(`http://localhost:3000/cart/add/${productID}`, {
                 method: 'POST', 
                 headers: {
@@ -108,6 +114,7 @@
             }).catch(error => {
                 console.error("An error occured while adding product to the cart")
             })
+
         }
 
     </script>

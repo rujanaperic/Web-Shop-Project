@@ -13,7 +13,11 @@
                     <a href="http://localhost:3000/cart" class="cart-image-link">
                         <img class="shopping-cart-image" src="http://localhost:3000/images/cart-icon.svg" alt="cart">
                     </a>
-                    <p id="cart-items"></p>
+                    <% if (sum === undefined) {%>
+                        <p id="cart-items"></p>
+                    <% } else { %>
+                        <p id="cart-items"><%= sum%></p>
+                    <% } %>
                     <img class="search-icon-image" src="http://localhost:3000/images/searchicon.png" alt="">
                 </div>
             </div>

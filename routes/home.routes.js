@@ -12,9 +12,13 @@ const getCategories = (req, res, next) => {
     
     //check
     //console.log(categories)
+    let sum = 0
+    req.session.cart?.forEach(item => {
+        sum += item.quantity
+    })
 
     //sending this data as response
-    res.render('home', {categories: categories, products: undefined})
+    res.render('home', {categories: categories, products: undefined, sum: sum})
     next()
 }
 
@@ -24,12 +28,16 @@ const getProducts = (req, res, next) => {
     const categoryID = req.params.id
     const categories = mydata.categories
     const products = mydata.categories[categoryID].products
-    
+    const cart = req.session.cart || []
     //check
     //console.log(products)
+    let sum = 0
+    req.session.cart?.forEach(item => {
+        sum += item.quantity
+    })
 
     //sending this data as response
-    res.render('home', {categories: categories, products: products})
+    res.render('home', {categories: categories, products: products, cart: cart, sum: sum})
     next()
 
 }

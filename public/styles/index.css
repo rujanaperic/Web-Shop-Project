@@ -418,6 +418,10 @@
   font-family: 'Manrope', sans-serif;
 }
 
+.card-quantity-div-invisible {
+  display: none;
+}
+
 .content-outer-div {
   display: grid;
   flex-direction: column;
@@ -431,6 +435,8 @@
   justify-content: center;
   width: 100%;
 }
+
+
 
 .cart-text {
   justify-content: center;

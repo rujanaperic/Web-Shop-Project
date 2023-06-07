@@ -25,6 +25,11 @@ const addProduct = async (req, res, next) => {
     console.log(req.session.cart)
     //all ok
 
+    let sum = 0
+    req.session.cart?.forEach(item => {
+        sum += item.quantity
+    })
+
     res.sendStatus(200)   
 }
 
@@ -51,6 +56,11 @@ const removeProduct = async (req, res, next) => {
         //check
         console.log(req.session.cart)
         //all ok
+
+        let sum = 0
+        req.session.cart?.forEach(item => {
+            sum += item.quantity
+        })
     
         res.sendStatus(200)
 }
@@ -73,6 +83,7 @@ const getAllProducts = (req, res, next) => {
     //all good
 
     res.render("cart", {helper: req.session.cart, sum: sum})
+    res.render("header", {helper: req.session.cart, sum: sum})
 
 }
 
