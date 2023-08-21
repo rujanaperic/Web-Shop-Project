@@ -1,5 +1,5 @@
 # Web-Shop-Project
-Full stack web application (HTML, CSS, JS, NODE) for uni classes
+Full stack web application (HTML, CSS, JS, NODE) for RPPW@FER
 
 ## Libraries needed for correct functionality
 ```npm install -g nodemon```
